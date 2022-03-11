@@ -27,17 +27,6 @@
     "@aws-cdk/core:target-partitions": [
       "aws",
       "aws-cn"
-    ],
-
-    "dev": {
-      "vpcCdir": "10.0.0.0/16",
-      "maxAzs": 2
-    },
-
-    "prod": {
-      "vpcCdir": "10.10.0.0/16",
-      "maxAzs": 3
-    }
+    ]
   }
-
 }

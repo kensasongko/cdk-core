@@ -7,7 +7,7 @@ import { NetworkConstruct } from '../lib/network-construct';
 import { CertificateConstruct } from '../lib/certificate-construct';
 
 interface CoreStackProps extends StackProps {
-  vpcCdir: string;
+  vpcCidr: string;
   maxAzs: number;
 }
 
@@ -15,11 +15,13 @@ export class CoreStack extends Stack {
   constructor(scope: Construct, id: string, props: CoreStackProps) {
     super(scope, id, props);
 
+    // Deploy VPC
     new NetworkConstruct(this, 'NetworkConstruct', {
-      vpcCdir: props.vpcCdir,
+      vpcCidr: props.vpcCidr,
       maxAzs: props.maxAzs,
     });
-    //const domainConstruct = new DomainConstruct(this, 'DomainConstruct');
+
+    // Generate certificate
     new CertificateConstruct(this, 'CertificateConstruct');
   }
 }

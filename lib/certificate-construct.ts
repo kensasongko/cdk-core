@@ -8,11 +8,9 @@ import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 export class CertificateConstruct extends Construct {
   constructor(scope: Stack, id: string) {
     super(scope, id);
-    console.log(scope.region);
 
-    const domain = ssm.StringParameter.valueFromLookup(this, '/Cdk/Bootstrap/Domain');
+    const domain = ssm.StringParameter.valueFromLookup(this, '/cdk/bootstrap/domain');
     //const hostedZoneId = ssm.StringParameter.valueFromLookup(this, '/Cdk/Bootstrap/hostedZoneId');
-    //console.log(domain);
 
     const zone = route53.HostedZone.fromLookup(this, 'Zone', { 
       domainName: domain,
@@ -24,7 +22,7 @@ export class CertificateConstruct extends Construct {
     });
 
     new ssm.StringParameter(this, 'WildcardCertificateArn', {
-      parameterName: '/Cdk/Core/WildcardCertificateArn',
+      parameterName: '/cdk/core/wildcard-certificate-arn',
       stringValue: certificate.certificateArn,
       tier: ssm.ParameterTier.STANDARD,
     });

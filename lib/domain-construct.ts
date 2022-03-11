@@ -9,7 +9,7 @@ export class DomainConstruct extends Construct {
     super(scope, id);
 
     const domain = ssm.StringParameter.fromStringParameterAttributes(this, 'Domain', {
-      parameterName: '/Cdk/Bootstrap/Domain',
+      parameterName: '/cdk/bootstrap/domain',
     }).stringValue;
 
     this.zone = new route53.PublicHostedZone(this, 'HostedZone', {
